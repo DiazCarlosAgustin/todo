@@ -14,12 +14,12 @@ export default {
     SET_TODOS(state, params) {
       state.todos = params;
     },
-    DELETE_TODO(state, params) {
-      // TODO: hacer la mutacion para eliminar 1 todo
-    },
-    UPDATE_TODO(state, payment) {
-      //TODO: HACER LA MUTACION PARA ACTUALIZAR UN TODO
-    },
+    // DELETE_TODO(state, params) {
+    // TODO: hacer la mutacion para eliminar 1 todo
+    // },
+    // UPDATE_TODO(state, payment) {
+    //TODO: HACER LA MUTACION PARA ACTUALIZAR UN TODO
+    // },
   },
   actions: {
     async get_todos(context, id) {
