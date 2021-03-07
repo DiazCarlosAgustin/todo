@@ -5,6 +5,7 @@ export default {
   state: {
     auth: false,
     user: null,
+    usersToAdd: null,
   },
   getters: {
     GET_USER(state) {
@@ -16,14 +17,23 @@ export default {
     GET_TOKEN() {
       return localStorage.getItem("userToken");
     },
+    GET_USER_ID(state) {
+      return state.user.id;
+    },
+    GET_USERS_TO_ADD(state) {
+      return state.usersToAdd;
+    },
   },
   mutations: {
     SET_USER(state, params) {
-      console.log(params);
       state.user = params;
       state.auth = Boolean(state.user);
     },
-    SET_TOKEN(state, params) {
+    SET_USERS_TO_ADD(state, params) {
+      console.log(params);
+      state.usersToAdd = params;
+    },
+    SET_TOKEN(params) {
       localStorage.setItem("userToken", params);
     },
   },
@@ -54,6 +64,20 @@ export default {
         .catch((err) => {
           console.error(err);
         });
+    },
+    async getUsersToAdd(context) {
+      await axios
+        .get("http://127.0.0.1:3000/user/" + context.getters.GET_USER_ID, {
+          headers: {
+            userToken: context.getters.GET_TOKEN,
+          },
+        })
+        .then((res) => {
+          if (res.data.status === "Ok") {
+            context.commit("SET_USERS_TO_ADD", res.data.users);
+          }
+        })
+        .catch((err) => console.error(err));
     },
   },
 };

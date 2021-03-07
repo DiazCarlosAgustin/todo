@@ -2,7 +2,7 @@
   <nav class="relative w-full h-full shadow-lg">
     <div class="bg-white h-16 w-full absolute inset-y-0 px-4 shadow-lg">
       <div class="flex justify-between items-center h-full">
-        <router-link class="text-md text-green-500" to="/">
+        <router-link class="text-lg font-extrabold text-green-500 " to="/">
           ToDo
         </router-link>
         <template v-if="!auth">
@@ -41,7 +41,9 @@
       class="w-full md:w-32 bg-white shadow-lg h-10 flex justify-center items-center absolute top-16 md:right-0 md:mr-3"
       v-if="showOptionsUser"
     >
-      <span class="text-green-500">Cerrar sesion</span>
+      <span @mouseleave="showOptionsUser = false" class="text-green-500"
+        >Cerrar sesion</span
+      >
     </div>
   </nav>
 </template>
