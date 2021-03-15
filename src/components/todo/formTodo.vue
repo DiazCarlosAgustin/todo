@@ -112,7 +112,7 @@ export default Vue.extend({
     }),
     validarCambio() {
       if (this.todo.user != null) {
-        if (this.username != this.lastSelected) {
+        if (this.username != this.lastSelected && this.vincularAUsuario) {
           this.todo.user = null;
         }
       }
@@ -131,29 +131,27 @@ export default Vue.extend({
             "Debe de seleccionar un usuario o deseleccionar la opcion de vincular a otro usuario.",
           type: "danger",
         });
-      }
-      if (this.todo.user == 0 && this.vincularAUsuario == false) {
-        this.todo.user = this.userDfault;
-        this.crearTodo(this.todo);
-        this.todo = {
-          titulo: "",
-          descripcion: "",
-          user: 0,
-          fromUser: 0,
-          progreso: 0,
-        };
       } else {
-        this.crearTodo(this.todo);
-        this.todo = {
-          titulo: "",
-          descripcion: "",
-          user: 0,
-          fromUser: 0,
-          progreso: 0,
-        };
+        if (this.todo.user == 0 && this.vincularAUsuario == false) {
+          this.todo.user = this.userDfault;
+          this.crearTodo(this.todo);
+          this.clearTodos();
+        } else {
+          this.crearTodo(this.todo);
+          this.clearTodos();
+        }
       }
       this.username = "";
       this.validarCambio();
+    },
+    clearTodos() {
+      this.todo = {
+        titulo: "",
+        descripcion: "",
+        user: this.userDfault,
+        fromUser: 0,
+        progreso: 0,
+      };
     },
   },
   computed: {

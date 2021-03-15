@@ -41,7 +41,7 @@ export default {
       await axios
         .post(
           "http://127.0.0.1:3000/friend/",
-          { id, friend_id },
+          { user_id: id, friend_id },
           {
             headers: {
               userToken: store.getters["user/GET_TOKEN"],

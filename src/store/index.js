@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import User from "./user";
 import Todo from "./todo";
 import Friend from "./friend";
+import Notificacion from "./notificacion";
 import Alert from "./alert";
 Vue.use(Vuex);
 
@@ -15,5 +16,6 @@ export default new Vuex.Store({
     todo: Todo,
     friend: Friend,
     alert: Alert,
+    notificacion: Notificacion,
   },
 });

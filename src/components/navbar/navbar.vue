@@ -12,7 +12,7 @@
         </template>
         <template v-if="auth">
           <div class="flex items-center">
-            <div class="px-3">
+            <div class="px-3" @click="showNotificaciones = !showNotificaciones">
               <svg
                 class="h-6 w-6 text-green-500"
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,11 +37,19 @@
         </template>
       </div>
     </div>
+
+    <Notificaciones
+      v-if="showNotificaciones"
+      class="min-h-0 h-auto max-h-64 top-16 absolute"
+    />
     <div
       class="w-full md:w-32 bg-white shadow-lg h-10 flex justify-center items-center absolute top-16 md:right-0 md:mr-3"
       v-if="showOptionsUser"
     >
-      <span @mouseleave="showOptionsUser = false" class="text-green-500"
+      <span
+        @mouseleave="showOptionsUser = false"
+        @click="cerrarSession"
+        class="text-green-500"
         >Cerrar sesion</span
       >
     </div>
@@ -49,14 +57,22 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import Notificaciones from "../notificaciones.vue";
 import { mapGetters } from "vuex";
 export default Vue.extend({
   data() {
     return {
       showOptionsUser: false,
+      showNotificaciones: false,
     };
   },
+  components: {
+    Notificaciones,
+  },
   methods: {
+    cerrarSession() {
+      this.$store.dispatch("user/cerrarSession");
+    },
     showOptions() {
       this.showOptionsUser = !this.showOptionsUser;
     },

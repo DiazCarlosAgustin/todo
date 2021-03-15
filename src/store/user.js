@@ -30,11 +30,16 @@ export default {
       state.auth = Boolean(state.user);
     },
     SET_USERS_TO_ADD(state, params) {
-      console.log(params);
       state.usersToAdd = params;
     },
-    SET_TOKEN(params) {
+    SET_TOKEN(state, params) {
       localStorage.setItem("userToken", params);
+    },
+    CLOSE_SESSION(state) {
+      localStorage.removeItem("userToken");
+      state.user = null;
+      state.usersToAdd = null;
+      state.auth = false;
     },
   },
   actions: {
@@ -78,6 +83,10 @@ export default {
           }
         })
         .catch((err) => console.error(err));
+    },
+    cerrarSession(context) {
+      context.commit("CLOSE_SESSION");
+      router.push({ path: "/acceder" });
     },
   },
 };

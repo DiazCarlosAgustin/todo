@@ -36,10 +36,11 @@
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="w-full shadow bg-gray-100 rounded-md" v-if="!edit">
         <div
-          class="bg-green-500 text-xs leading-none py-1 text-center rounded-l text-black "
+          class="bg-green-500 text-xs leading-none py-1 text-center rounded-md text-black "
           :style="{ width: todo.progreso + '%' }"
         >
-          {{ todo.progreso }}%
+          <span v-if="todo.progreso < 100">{{ todo.progreso }}%</span>
+          <span v-else>Completado</span>
         </div>
       </div>
       <div class="text-sm text-gray-900" v-if="edit">
@@ -108,7 +109,10 @@
           />
         </svg>
       </span>
-      <span class="text-red-600 hover:text-red-900 px-3">
+      <span
+        class="text-red-600 hover:text-red-900 px-3"
+        @click="deleteTodo([todo.id, index])"
+      >
         <svg
           class="w-4 h-4"
           xmlns="http://www.w3.org/2000/svg"
@@ -133,10 +137,7 @@ import Vue from "vue";
 import { mapActions } from "vuex";
 
 export default Vue.extend({
-  props: {
-    todo: Array || Object,
-    index: Number,
-  },
+  props: ["todo"],
   data() {
     return {
       edit: false,
@@ -145,6 +146,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       updateTodo: "todo/update_todo",
+      deleteTodo: "todo/delete_todo",
     }),
   },
 });

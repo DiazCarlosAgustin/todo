@@ -93,6 +93,11 @@ export default Vue.extend({
       userId: "user/GET_USER_ID",
     }),
   },
+  // watch: {
+  //   todos(nuevo, old) {
+  //     console.log(nuevo, old);
+  //   },
+  // },
 });
 </script>
 
