@@ -1,5 +1,7 @@
 import axios from "axios";
 import router from "../router";
+import store from "../store";
+
 export default {
   namespaced: true,
   state: {
@@ -87,6 +89,23 @@ export default {
     cerrarSession(context) {
       context.commit("CLOSE_SESSION");
       router.push({ path: "/acceder" });
+    },
+    async registrarse(context, user) {
+      await axios
+        .post("http://127.0.0.1:3000/auth/register", user)
+        .then(async (response) => {
+          if (response.data.status === "Ok") {
+            router.push({ path: "/acceder" });
+          }
+          const type = await store.dispatch(
+            "alert/getTypeAlert",
+            response.data.status
+          );
+          store.dispatch("alert/addAlert", {
+            msg: response.data.msg,
+            type: type,
+          });
+        });
     },
   },
 };
