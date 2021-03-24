@@ -57,12 +57,12 @@
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="text-sm text-gray-900">
-        {{ todo.createdAt }}
+        {{ todo.createdAt | formatDate }}
       </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="text-sm text-gray-900">
-        {{ todo.updatedAt }}
+        {{ todo.updatedAt | formatDate }}
       </div>
     </td>
     <td class="px-6 py-6 text-right text-sm font-medium flex items-center">
@@ -135,7 +135,16 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapActions } from "vuex";
-
+Vue.filter("formatDate", (value) => {
+  const date = new Date(value);
+  return date.toLocaleDateString(["es-AR"], {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+});
 export default Vue.extend({
   props: ["todo"],
   data() {

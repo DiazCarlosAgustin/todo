@@ -13,8 +13,20 @@
       >
         <span>{{ notificacion.mensaje }}</span>
         <div class="flex justify-end" v-if="notificacion.type === 'solicitud'">
-          <span class="text-gray-600 px-2 text-right text-md">Rechazar</span>
-          <span class="text-blue-500 px-2 text-right text-md">Aceptar</span>
+          <span
+            class="text-gray-600 px-2 text-right text-md"
+            @click="
+              updateSolicitud({ friend_id: notificacion.sendBy, aceptado: 1 })
+            "
+            >Rechazar</span
+          >
+          <span
+            class="text-blue-500 px-2 text-right text-md"
+            @click="
+              updateSolicitud({ friend_id: notificacion.sendBy, aceptado: 0 })
+            "
+            >Aceptar</span
+          >
         </div>
       </div>
     </div>
@@ -34,6 +46,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       getNotificaciones: "notificacion/get_notificaciones",
+      updateSolicitud: "friend/updateSolicitud",
     }),
   },
   computed: {

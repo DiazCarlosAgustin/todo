@@ -44,12 +44,10 @@
     />
     <div
       class="w-full md:w-32 bg-white shadow-lg h-10 flex justify-center items-center absolute top-16 md:right-0 md:mr-3"
+      @click="cerrarSession"
       v-if="showOptionsUser"
     >
-      <span
-        @mouseleave="showOptionsUser = false"
-        @click="cerrarSession"
-        class="text-green-500"
+      <span @mouseleave="showOptionsUser = false" class="text-green-500"
         >Cerrar sesion</span
       >
     </div>

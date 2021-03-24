@@ -25,10 +25,12 @@
             v-model="user.password"
           />
         </div>
-        <div class="py-3 text-center w-full">
-          <router-link class="w-full" to="/registrarse">
-            <button class="p-3 w-full">Registrarse</button>
+        <div class="w-full py-3 text-center">
+          <router-link class="w-full p-4" to="/registrarse">
+            <span class="p-3 w-full">Registrarse</span>
           </router-link>
+        </div>
+        <div class="py-3 text-center w-full">
           <button class="w-full p-3 bg-gray-800 text-white">Aceptar</button>
         </div>
       </form>

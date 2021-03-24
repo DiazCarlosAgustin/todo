@@ -62,5 +62,33 @@ export default {
           console.error(err);
         });
     },
+    async updateSolicitud(context, params) {
+      const id = store.getters["user/GET_USER_ID"];
+      console.log(params);
+      await axios
+        .put(
+          "http://127.0.0.1:3000/friend/",
+          {
+            friend_id: params.friend_id,
+            user_id: id,
+            aceptado: params.aceptado,
+          },
+          {
+            headers: {
+              userToken: store.getters["user/GET_TOKEN"],
+            },
+          }
+        )
+        .then(async (res) => {
+          const type = await store.dispatch(
+            "alert/getTypeAlert",
+            res.data.status
+          );
+          store.dispatch("alert/addAlert", {
+            msg: res.data.msg,
+            type: type,
+          });
+        });
+    },
   },
 };

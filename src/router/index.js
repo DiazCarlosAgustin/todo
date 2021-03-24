@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Home from "../views/Index.vue";
 import Acceder from "../views/Acceder.vue";
+import Registrarse from "../views/Registrarse.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,6 +15,10 @@ const routes = [
   {
     path: "/acceder",
     component: Acceder,
+  },
+  {
+    path: "/registrarse",
+    component: Registrarse,
   },
 ];
 
